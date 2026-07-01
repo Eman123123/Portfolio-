@@ -1,152 +1,607 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eman Fatima - Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eman Fatima · AI Engineer</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: #0b1120;
+      color: #e8edf5;
+      line-height: 1.6;
+      padding: 2rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      padding: 2rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-section > div {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-section h2 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #b6e6e0 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-section .typing {
+      background: linear-gradient(135deg, #2dd4bf, #0ea5e9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    .hero-section .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.2rem;
+      background: #2dd4bf;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-section .about-text {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 600px;
+    }
+
+    .hero-section img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #2dd4bf;
+      box-shadow: 0 0 40px rgba(45, 212, 191, 0.15);
+      flex-shrink: 0;
+      transition: 0.3s;
+    }
+
+    .hero-section img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 60px rgba(45, 212, 191, 0.25);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+
+    .contact-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .contact-links a:hover {
+      color: #2dd4bf;
+    }
+
+    .contact-links i {
+      color: #2dd4bf;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s;
+      border: 1px solid transparent;
+      margin-right: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-primary {
+      background: #2dd4bf;
+      color: #0b1120;
+      box-shadow: 0 4px 14px rgba(45, 212, 191, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: #5eead4;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -8px rgba(45, 212, 191, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid #334155;
+      color: #e2e8f0;
+    }
+
+    .btn-outline:hover {
+      background: #1e293b;
+      border-color: #2dd4bf;
+      color: #2dd4bf;
+    }
+
+    /* ----- SECTION TITLES ----- */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 650;
+      margin-top: 3.5rem;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .section-title i {
+      color: #2dd4bf;
+    }
+
+    .section-sub {
+      color: #94a3b8;
+      margin-bottom: 1.8rem;
+      font-size: 1.05rem;
+    }
+
+    /* ----- SKILLS (category + chips, exactly from your image) ----- */
+    .skills-container {
+      background: #141e30;
+      border-radius: 28px;
+      padding: 2rem 2.2rem;
+      border: 1px solid #1f2b41;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .skill-category {
+      margin-bottom: 1.8rem;
+    }
+
+    .skill-category:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-category h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2dd4bf;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .skill-category h4 i {
+      font-size: 0.9rem;
+      color: #2dd4bf;
+    }
+
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-chip {
+      background: #1f2b41;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: #d1dbe8;
+      border: 1px solid #2a3a55;
+      transition: 0.2s;
+    }
+
+    .skill-chip:hover {
+      border-color: #2dd4bf;
+      color: #2dd4bf;
+      transform: translateY(-2px);
+    }
+
+    /* ----- PROJECTS ----- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 1rem 0;
+    }
+
+    .project-card {
+      background: #141e30;
+      border-radius: 24px;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid #1f2b41;
+      transition: 0.25s ease;
+    }
+
+    .project-card:hover {
+      border-color: #2dd4bf;
+      transform: translateY(-4px);
+    }
+
+    .project-card h4 {
+      font-size: 1.2rem;
+      color: #f0f5fe;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-card h4 i {
+      color: #2dd4bf;
+    }
+
+    .project-card p {
+      color: #a6b9d0;
+      font-size: 0.95rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .project-tags span {
+      background: #1f2b41;
+      padding: 0.15rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      color: #b8ccdf;
+      border: 1px solid #2a3a55;
+    }
+
+    /* ----- EDUCATION + LANGUAGES (two‑col) ----- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-card {
+      background: #141e30;
+      border-radius: 28px;
+      padding: 1.8rem 2rem;
+      border: 1px solid #1f2b41;
+    }
+
+    .info-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #eaf0fa;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .info-card h3 i {
+      color: #2dd4bf;
+    }
+
+    .info-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .info-item .title {
+      font-weight: 600;
+      color: #d6e2f0;
+      font-size: 1rem;
+    }
+
+    .info-item .meta {
+      color: #94a8be;
+      font-size: 0.9rem;
+    }
+
+    .info-item .link {
+      color: #2dd4bf;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .info-item .link:hover {
+      text-decoration: underline;
+    }
+
+    /* language bars */
+    .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-name {
+      width: 70px;
+      font-weight: 500;
+      color: #d1dbe8;
+    }
+
+    .lang-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: #1f2b41;
+      border-radius: 40px;
+      min-width: 80px;
+    }
+
+    .lang-bar-fill {
+      height: 100%;
+      border-radius: 40px;
+      background: linear-gradient(90deg, #2dd4bf, #0ea5e9);
+      width: 100%;
+    }
+
+    .lang-level {
+      color: #b6c8e0;
+      font-size: 0.85rem;
+      width: 60px;
+      text-align: right;
+    }
+
+    .footer {
+      margin-top: 3.5rem;
+      text-align: center;
+      color: #64748b;
+      border-top: 1px solid #1e2a3f;
+      padding-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .footer i {
+      color: #2dd4bf;
+    }
+
+    @media (max-width: 700px) {
+      .hero-section {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .hero-section img {
+        width: 160px;
+        height: 160px;
+      }
+      .hero-section .about-text {
+        margin: 0 auto;
+      }
+      .contact-links {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <header class="header">
-    <h1 class="name">Eman Fatima</h1>
-    <div class="social-links">
-      <a href="https://github.com/Eman123123">GitHub</a>
-      <a href="https://www.linkedin.com/in/eman-fatima-145a86282/">LinkedIn</a>
-    </div>
-    <nav class="menu">
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<div class="container">
 
+  <!-- HERO SECTION -->
   <section id="hero" class="hero-section section">
     <div>
       <h2>Eman Fatima</h2>
-      <p>I'm <span class="typing">Computer Science Student, Software Developer, Problem Solver</span></p>
-    </div>
-    <img src="https://plus.unsplash.com/premium_photo-1667520104627-fd1b3c515bb0?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-  </section>
-
-  <section id="about" class="about-section section">
-    <h2>About</h2>
-    <p>Learn more about me, my skills, and my journey.</p>
-    <div class="about-content">
-      <h3>Software Developer & CS Student</h3>
-      <ul>
-        <li><strong>University:</strong> FAST NUCES</li>
-        <li><strong>Degree:</strong> BCS</li>
-        <li><strong>Email:</strong> f223343@cfd.nu.edu.pk</li>
-        <li><strong>City:</strong> Your City</li>
-        <li><strong>Skills:</strong> C++, Python, JS, SQL</li>
-        <li><strong>Freelance:</strong> Available</li>
-      </ul>
-      <p>I am dedicated to continuous learning and building impactful solutions.</p>
-    </div>
-  </section>
-
-  <section id="projects" class="projects-section section">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card" onclick="showFullscreenImage('https://media.licdn.com/dms/image/v2/D5612AQE8lRG4T0M5JQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1681731881702?e=2147483647&v=beta&t=yzyCxUheIA2VYnqi2JFddNq6mVSJUgvD1mo1HXkzjRY')">
-        <h4>Hospital Management System</h4>
-        <p>Web app for hospital operations.</p>
-        <a href="https://github.com/Eman123123/hospital-management">View on GitHub</a>
+      <p>I'm <span class="typing"></span><span class="typing-cursor"></span></p>
+      <div class="about-text">
+        I build AI that understands language, retrieves knowledge, and generates images. PyTorch · Hugging Face · RAG · GANs.
       </div>
-      <div class="project-card" onclick="showFullscreenImage('https://media.licdn.com/dms/image/C4D12AQE8JzAPt4Enkw/article-cover_image-shrink_720_1280/0/1597679534784?e=2147483647&v=beta&t=sG7y1FqC-OumGaXthTO-VlXjKRvGa__T4iw9irX3kK4')">
-        <h4>Candy Crush Clone</h4>
-        <p>JS-based Candy Crush game.</p>
-        <a href="https://github.com/Eman123123/candy-crush-clone">View on GitHub</a>
-      </div>
-      <div class="project-card" onclick="showFullscreenImage('https://img.freepik.com/premium-vector/online-dictionary-education-web-distance-learning-courses-international-ebook-translator-banner-landing-page-isometric-vector-illustration-internet-studying-glossary-vocabulary-lexicon-information_93487-1088.jpg')">
-        <h4>Online Dictionary</h4>
-        <p>Word definitions using API.</p>
-        <a href="https://github.com/Eman123123/online-dictionary">View on GitHub</a>
+      <div class="contact-links">
+        <a href="mailto:emanfatima22063@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        <a href="https://github.com/Eman123123" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/eman-fatima-145a86282/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
       </div>
     </div>
+    <img src="https://plus.unsplash.com/premium_photo-1667520104627-fd1b3c515bb0?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Eman Fatima" />
   </section>
 
-  <section id="contact" class="contact-section section">
-    <h2>Contact</h2>
-    <div class="contact-info">
-      <div>
-        <h3>Address</h3>
-        <p>Sheikhupura, Pakistan</p>
-      </div>
-      <div>
-        <h3>Call Me</h3>
-        <p>+123 456 7890</p>
-      </div>
-      <div>
-        <h3>Email Me</h3>
-        <p>abcd@gmail.com</p>
+  <!-- SKILLS (category + chips, exactly from your image) -->
+  <h2 class="section-title"><i class="fas fa-code"></i> SKILLS</h2>
+
+  <div class="skills-container">
+
+    <div class="skill-category">
+      <h4><i class="fas fa-brain"></i> Programming Languages</h4>
+      <div class="skill-chips">
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">C/C++</span>
+        <span class="skill-chip">MERN Stack Development</span>
       </div>
     </div>
-  </section>
+    <!-- AI/ML Category -->
+    <div class="skill-category">
+      <h4><i class="fas fa-brain"></i> AI / ML</h4>
+      <div class="skill-chips">
+        <span class="skill-chip">PyTorch</span>
+        <span class="skill-chip">Natural Language Processing (NLP)</span>
+        <span class="skill-chip">Transformers</span>
+        <span class="skill-chip">Deep Learning</span>
+        <span class="skill-chip">Large Language Models (LLMs)</span>
+        <span class="skill-chip">Generative AI</span>
+        <span class="skill-chip">Seq2Seq Models</span>
+        <span class="skill-chip">Attention Mechanisms</span>
+        <span class="skill-chip">Retrieval-Augmented Generation (RAG)</span>
+      </div>
+    </div>
 
-  <div class="fullscreen-overlay" id="fullscreenImageOverlay">
-    <img src="" alt="Project Image" id="fullscreenImage">
+    <!-- Web Category -->
+    <div class="skill-category">
+      <h4><i class="fas fa-globe"></i>Deployment & Tools</h4>
+      <div class="skill-chips">
+        <span class="skill-chip">Git</span>
+        <span class="skill-chip">GitHub</span>
+        <span class="skill-chip">VS Code</span>
+        <span class="skill-chip">Streamlit</span>
+        <span class="skill-chip">Gradio</span>
+        <span class="skill-chip">MongoDB</span>
+        <span class="skill-chip">Oracle SQL</span>
+        <span class="skill-chip">Google Cloud</span>
+        <span class="skill-chip">Google Colab</span>
+      </div>
+    </div>
   </div>
 
-  <script>
-    const observerOptions = { threshold: 0.1 };
-    const revealSections = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-    const sectionObserver = new IntersectionObserver(revealSections, observerOptions);
-    document.querySelectorAll('.section').forEach(section => {
-      sectionObserver.observe(section);
-    });
+<!-- PORTFOLIO (projects) - One box per line with longer descriptions -->
+<h2 class="section-title"><i class="fas fa-folder-open"></i> My Portfolio</h2>
+<p class="section-sub">A collection of my recent projects</p>
 
-    const textArray = ["Computer Science Student", "Software Developer", "Problem Solver"];
-    let currentIndex = 0, charIndex = 0;
-    const typingSpan = document.querySelector('.typing');
-    function type() {
-      if (charIndex < textArray[currentIndex].length) {
-        typingSpan.textContent += textArray[currentIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(type, 100);
-      } else {
-        setTimeout(erase, 1500);
-      }
-    }
-    function erase() {
-      if (charIndex > 0) {
-        typingSpan.textContent = textArray[currentIndex].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(erase, 50);
-      } else {
-        currentIndex = (currentIndex + 1) % textArray.length;
-        setTimeout(type, 500);
-      }
-    }
-    document.addEventListener("DOMContentLoaded", () => {
-      if (typingSpan) {
-        setTimeout(type, 1000);
-      }
-    });
+<div class="projects-grid" style="grid-template-columns: 1fr;">
+  <div class="project-card">
+    <h4><i class="fas fa-robot"></i> Escapexpert (FYP)</h4>
+    <p>Built an AI/VR web platform simulating earthquakes and floods in 3D from blueprints or hand-drawn floor plans. Integrated real-time evacuation pathfinding using A* algorithm for safe route guidance. Developed a disaster prediction module using Google Earth Engine (GEE) and Flask API analyzing rainfall and water levels. Generated binary risk scores (0=low, 1=high) with heatmap visualization for proactive safety planning.</p>
+    <div class="project-tags"><span>A*</span><span>GEE</span><span>Flask</span><span>VR</span><span>AI</span><span>Three.js</span></div>
+  </div>
 
-    function showFullscreenImage(imageUrl) {
-      const overlay = document.getElementById('fullscreenImageOverlay');
-      const fullscreenImage = document.getElementById('fullscreenImage');
-      fullscreenImage.src = imageUrl;
-      overlay.classList.add('show');
-      overlay.onclick = function () {
-        overlay.classList.remove('show');
-      };
+  <div class="project-card">
+    <h4><i class="fas fa-image"></i> CycleGAN Unpaired Image Translation</h4>
+    <p>Implemented CycleGAN from scratch in PyTorch for Sketch-Photo translation without paired training data. Used ResNet generators with PatchGAN discriminators, applying cycle consistency (λ=10) and identity loss (λ=5). Trained with mixed precision on dual T4 GPUs and evaluated using SSIM &amp; PSNR metrics for image quality assessment.</p>
+    <div class="project-tags"><span>PyTorch</span><span>GAN</span><span>ResNet</span></div>
+  </div>
+
+  <div class="project-card">
+    <h4><i class="fas fa-language"></i> NMT Urdu → Roman Urdu</h4>
+    <p>Built a Seq2Seq model with BiLSTM encoder and multi-layer LSTM decoder to translate Urdu poetic texts (ghazals) into Roman Urdu while preserving meaning, rhyme, and emotional tone. Experimented with embeddings, hidden sizes, and dropout. Evaluated using BLEU, perplexity, and CER metrics for translation quality.</p>
+    <div class="project-tags"><span>BiLSTM</span><span>Seq2Seq</span><span>NLP</span><span>PyTorch</span></div>
+  </div>
+
+  <div class="project-card">
+    <h4><i class="fas fa-stethoscope"></i> Clinical RAG DiRect</h4>
+    <p>Built a complete RAG pipeline using the MIMIC-IV dataset for clinical question answering with zero hallucinations. Implemented dense retrieval using sentence-transformer embeddings (all-MiniLM-L6-v2) with FAISS index. Integrated Flan-T5 Large with strict prompt engineering, grounding responses to retrieved evidence only. Evaluated retrieval (Precision/Recall) and generation (BLEU, ROUGE-L, semantic coherence).</p>
+    <div class="project-tags"><span>RAG</span><span>FAISS</span><span>Flan-T5</span><span>Healthcare</span></div>
+  </div>
+
+  <div class="project-card">
+    <h4><i class="fas fa-camera"></i> Neural Storyteller Image Captioning</h4>
+    <p>Developed a Seq2Seq image captioning model on the Flickr30k dataset using ResNet50 for 2048-dimensional feature extraction. Implemented LSTM decoder with Greedy and Beam Search (k=3). Evaluated using BLEU-4, Precision, Recall, and F1-Score for comprehensive performance analysis.</p>
+    <div class="project-tags"><span>ResNet</span><span>LSTM</span><span>Beam Search</span><span>Image Captioning</span></div>
+  </div>
+
+  <!-- Campus Explorer Project -->
+  <div class="project-card">
+    <h4><i class="fas fa-university"></i> Campus Explorer</h4>
+    <p>Built a comprehensive web platform for exploring and comparing universities in Pakistan. Developed a full-stack application using Node.js, Express, and MongoDB with web scraping capabilities to extract program data and academic calendars from university websites (FAST, NUST, COMSATS, UCP, LUMS, GIKI). Implemented user authentication with email verification, password reset functionality, and a review/rating system for universities. Integrated PDF parsing for academic calendar extraction and designed a responsive UI with Bootstrap for seamless cross-device experience.</p>
+    <div class="project-tags"><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Web Scraping</span></div>
+  </div>
+</div>
+
+
+<!-- EDUCATION (simple) -->
+<div class="info-grid" style="grid-template-columns: 1fr;">
+  <div class="info-card">
+    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+    <div class="info-item">
+      <div class="title">Bachelor of Computer Science</div>
+      <div class="meta">FAST-NUCES · 2022 – 2026</div>
+    </div>
+    <div class="info-item">
+      <div class="title">F.Sc Pre-Engineering</div>
+      <div class="meta">Punjab Group of Colleges · 2020 – 2022</div>
+    </div>
+  </div>
+</div>
+
+  <!-- footer -->
+  <div class="footer">
+    <p><i class="fas fa-heart" style="color:#2dd4bf;"></i>  built with PyTorch &amp; love · Eman Fatima  <i class="fas fa-mug-saucer" style="margin-left:10px;"></i></p>
+  </div>
+
+</div>
+
+<script>
+  // Typing animation - cycles through different roles
+  const roles = [
+    "AI Engineer · NLP · Generative AI",
+    "Problem Solver",
+    "Computer Science graduate",
+    "Software Developer"
+  ];
+
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typingElement = document.querySelector('.typing');
+  const cursorElement = document.querySelector('.typing-cursor');
+
+  function typeEffect() {
+    const currentRole = roles[roleIndex];
+    
+    if (!isDeleting) {
+      // Typing
+      typingElement.textContent = currentRole.substring(0, charIndex + 1);
+      charIndex++;
+      
+      if (charIndex === currentRole.length) {
+        // Pause at end of typing
+        isDeleting = true;
+        setTimeout(typeEffect, 2000);
+        return;
+      }
+      setTimeout(typeEffect, 80);
+    } else {
+      // Deleting
+      typingElement.textContent = currentRole.substring(0, charIndex - 1);
+      charIndex--;
+      
+      if (charIndex === 0) {
+        // Move to next role
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(typeEffect, 500);
+        return;
+      }
+      setTimeout(typeEffect, 40);
     }
-  </script>
+  }
+
+  // Start typing when page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(typeEffect, 1000);
+  });
+</script>
 
 </body>
-
 </html>
